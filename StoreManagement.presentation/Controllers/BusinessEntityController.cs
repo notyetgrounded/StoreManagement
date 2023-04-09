@@ -2,11 +2,14 @@
 
 namespace StoreManagement.Presentation.WebApi.Controllers
 {
-    public class BusinessEntityController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class BusinessEntityController : ControllerBase
     {
-        public IActionResult Index()
+        [HttpGet]
+        public int Index()
         {
-            return View();
+            return 10;
         }
     }
 }

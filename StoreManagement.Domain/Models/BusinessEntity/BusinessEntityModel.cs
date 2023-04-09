@@ -1,5 +1,4 @@
 ﻿using StoreManagement.Domain.Constants;
-using StoreManagement.Domain.Models.MetaData;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

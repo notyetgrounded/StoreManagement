@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{3AEC4D30-8B27-464F-BD07-04CC9B7AD72B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Domain", "..\StoreManagement.Domain\StoreManagement.Domain.csproj", "{D8E56E3B-7A24-4581-A4CB-62DF6F09CDAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreManagement.Domain", "..\StoreManagement.Domain\StoreManagement.Domain.csproj", "{D8E56E3B-7A24-4581-A4CB-62DF6F09CDAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Repository", "..\StoreManagement.Repository\StoreManagement.Repository.csproj", "{AC770C95-027D-422C-9590-38E9F107AACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreManagement.Repository", "..\StoreManagement.Repository\StoreManagement.Repository.csproj", "{AC770C95-027D-422C-9590-38E9F107AACB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

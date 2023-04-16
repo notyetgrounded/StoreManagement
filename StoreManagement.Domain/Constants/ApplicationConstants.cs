@@ -11,6 +11,5 @@ namespace StoreManagement.Domain.Constants
         public  const int DescriptionLength = 50;
         public const int CodeLength = 25;
         public const int NameLength = 30;
-
     }
 }

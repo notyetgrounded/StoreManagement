@@ -16,10 +16,8 @@ namespace StoreManagement.Domain.Models.User
         [Required]
         [MaxLength(ApplicationConstants.NameLength)]
         public string Name { get; set; }
-
         public IList<SecurityRoleAssociationModel> SecurityRoleAssociations { get; set; }
         public IList<EmployeeModel> Employees { get; set; }
-
-        public IList<PurchaseModel> purchases { get; set; }
+        public IList<PurchaseModel> Purchases { get; set; }
     }
 }

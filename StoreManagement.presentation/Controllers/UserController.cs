@@ -20,5 +20,11 @@ namespace StoreManagement.Presentation.WebApi.Controllers
         {
            return await _serviceManager.UserService.CreateUser(userCreateDto);
         }
+
+        [HttpGet]
+        public async Task<IList<UserDto>> GetAllUsers()
+        {
+            return await _serviceManager.UserService.GetAllUsers();
+        }
     }
 }

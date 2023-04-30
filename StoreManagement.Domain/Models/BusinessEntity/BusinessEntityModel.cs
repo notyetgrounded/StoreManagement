@@ -7,6 +7,7 @@ namespace StoreManagement.Domain.Models.BusinessEntity
     {
         [Key]
         public Guid BusinessEntityId { get; set; }
+        [Required]
 
         [MaxLength(ApplicationConstants.NameLength)]
         public string Name { get; set;}

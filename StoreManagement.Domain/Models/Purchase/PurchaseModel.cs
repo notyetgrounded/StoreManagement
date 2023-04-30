@@ -1,4 +1,5 @@
-﻿using StoreManagement.Domain.Models.BusinessEntity;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreManagement.Domain.Models.BusinessEntity;
 using StoreManagement.Domain.Models.User;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,6 +14,7 @@ namespace StoreManagement.Domain.Models.Purchase
         public Guid BusinessEntiyId { get; set; }
         public BusinessEntityModel BusinessEntity { get; set; }
         public DateTime DateTime { get; set; }
-        public float TotalAmount { get; set; }
+        [Precision(10, 4)]
+        public decimal TotalAmount { get; set; }
     }
 }

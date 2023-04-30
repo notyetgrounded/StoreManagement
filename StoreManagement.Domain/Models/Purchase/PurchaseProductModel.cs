@@ -1,4 +1,5 @@
-﻿using StoreManagement.Domain.Models.Product;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreManagement.Domain.Models.Product;
 using System.ComponentModel.DataAnnotations;
 
 namespace StoreManagement.Domain.Models.Purchase
@@ -11,7 +12,9 @@ namespace StoreManagement.Domain.Models.Purchase
         public PurchaseModel Purchase { get; set; }
         public Guid ProductId { get; set; }
         public ProductModel Product { get; set; }
-        public float Quantity { get; set; }
-        public float Amount { get; set; }
+        [Precision(10, 4)]
+        public decimal Quantity { get; set; }
+        [Precision(10, 4)]
+        public decimal Amount { get; set; }
     }
 }

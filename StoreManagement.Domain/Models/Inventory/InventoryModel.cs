@@ -1,4 +1,6 @@
-﻿using StoreManagement.Domain.Models.BusinessEntity;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreManagement.Domain.Constants;
+using StoreManagement.Domain.Models.BusinessEntity;
 using StoreManagement.Domain.Models.Product;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,11 +10,15 @@ namespace StoreManagement.Domain.Models.Inventory
     {
         [Key]
         public Guid InventoryId { get; set; }
+        [Required]
+        [MaxLength(ApplicationConstants.NameLength)]
         public string Name { get; set; }
         public Guid ProductId { get; set; }
         public ProductModel Product { get; set; }
         public int Stock { get; set; }
-        public float UnitCost { get; set; }
+
+        [Precision(10,4)]
+        public decimal UnitCost { get; set; }
         public Guid BusinessEntityId { get; set; }
         public BusinessEntityModel BusinessEntity { get; set; }
     }

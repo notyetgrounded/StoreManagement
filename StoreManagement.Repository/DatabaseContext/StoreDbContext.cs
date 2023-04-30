@@ -33,6 +33,7 @@ namespace StoreManagement.Repository.DatabaseContext
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new PurchaseConfiguration());
             modelBuilder.ApplyConfiguration(new InventoryConfiguration());
+            modelBuilder.ApplyConfiguration(new LinkedBusinessEntitesConfiguration());
         }
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options): base(options)

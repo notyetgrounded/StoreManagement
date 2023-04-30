@@ -352,15 +352,15 @@ namespace StoreManagement.Repository.Migrations
             modelBuilder.Entity("StoreManagement.Domain.Models.BusinessEntity.LinkedBusinessEntitesModel", b =>
                 {
                     b.HasOne("StoreManagement.Domain.Models.BusinessEntity.BusinessEntityModel", "ChildBusinessEntity")
-                        .WithMany()
+                        .WithMany("LinkedChildBuisnessEntities")
                         .HasForeignKey("ChildBusinessEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("StoreManagement.Domain.Models.BusinessEntity.BusinessEntityModel", "ParentBusinessEntity")
-                        .WithMany()
+                        .WithMany("LinkedParentBuisnessEntities")
                         .HasForeignKey("ParentBusinessEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ChildBusinessEntity");
@@ -461,6 +461,13 @@ namespace StoreManagement.Repository.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Purchase");
+                });
+
+            modelBuilder.Entity("StoreManagement.Domain.Models.BusinessEntity.BusinessEntityModel", b =>
+                {
+                    b.Navigation("LinkedChildBuisnessEntities");
+
+                    b.Navigation("LinkedParentBuisnessEntities");
                 });
 
             modelBuilder.Entity("StoreManagement.Domain.Models.Product.ProductModel", b =>

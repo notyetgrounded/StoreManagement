@@ -8,6 +8,8 @@ namespace StoreManagement.Repository.Configurations
     {
         public void Configure(EntityTypeBuilder<LinkedBusinessEntitesModel> builder)
         {
+            builder.HasOne(lb => lb.ParentBusinessEntity).WithMany(lb => lb.LinkedParentBuisnessEntities).HasForeignKey(lb => lb.ParentBusinessEntityId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(lb => lb.ChildBusinessEntity).WithMany(lb => lb.LinkedChildBuisnessEntities).HasForeignKey(lb => lb.ChildBusinessEntityId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

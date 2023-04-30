@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StoreManagement.Repository.DatabaseContext;
+using StoreManagement.Repository.Repositories.RepositoryManager;
+using StoreManagement.Service.Services.ServiceManager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IServiceManager, ServiceManager>();
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddDbContext<StoreDbContext>(options =>
 {
     string connectionString = builder.Configuration.GetConnectionString("StoreDbConnectionString");

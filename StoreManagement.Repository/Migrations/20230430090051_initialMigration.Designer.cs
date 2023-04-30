@@ -12,8 +12,8 @@ using StoreManagement.Repository.DatabaseContext;
 namespace StoreManagement.Repository.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20230429095152_fewTables")]
-    partial class fewTables
+    [Migration("20230430090051_initialMigration")]
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,13 +36,14 @@ namespace StoreManagement.Repository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("LastModifiedById")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedReason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -55,8 +56,6 @@ namespace StoreManagement.Repository.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("BusinessEntityId");
-
-                    b.HasIndex("LastModifiedById");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -93,13 +92,14 @@ namespace StoreManagement.Repository.Migrations
                     b.Property<Guid>("BusinessEntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("LastModifiedById")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedReason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -115,13 +115,12 @@ namespace StoreManagement.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("UnitCost")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 4)
+                        .HasColumnType("decimal(10,4)");
 
                     b.HasKey("InventoryId");
 
                     b.HasIndex("BusinessEntityId");
-
-                    b.HasIndex("LastModifiedById");
 
                     b.HasIndex("ProductId");
 
@@ -161,9 +160,6 @@ namespace StoreManagement.Repository.Migrations
                     b.Property<Guid>("BusinessEntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("LastModifiedById")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -174,6 +170,10 @@ namespace StoreManagement.Repository.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("PermissionId")
                         .HasColumnType("uniqueidentifier");
 
@@ -183,8 +183,6 @@ namespace StoreManagement.Repository.Migrations
                     b.HasKey("SecurityRoleAssociationId");
 
                     b.HasIndex("BusinessEntityId");
-
-                    b.HasIndex("LastModifiedById");
 
                     b.HasIndex("PermissionId");
 
@@ -210,13 +208,14 @@ namespace StoreManagement.Repository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("LastModifiedById")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedReason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -229,8 +228,6 @@ namespace StoreManagement.Repository.Migrations
 
                     b.HasIndex("Code")
                         .IsUnique();
-
-                    b.HasIndex("LastModifiedById");
 
                     b.ToTable("Products");
                 });
@@ -251,7 +248,8 @@ namespace StoreManagement.Repository.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 4)
+                        .HasColumnType("decimal(10,4)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -272,7 +270,8 @@ namespace StoreManagement.Repository.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 4)
+                        .HasColumnType("decimal(10,4)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
@@ -281,7 +280,8 @@ namespace StoreManagement.Repository.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 4)
+                        .HasColumnType("decimal(10,4)");
 
                     b.HasKey("PurchaseProductId");
 
@@ -317,17 +317,6 @@ namespace StoreManagement.Repository.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("StoreManagement.Domain.Models.BusinessEntity.BusinessEntityModel", b =>
-                {
-                    b.HasOne("StoreManagement.Domain.Models.User.UserModel", "LastModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("LastModifiedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LastModifiedBy");
-                });
-
             modelBuilder.Entity("StoreManagement.Domain.Models.Employee.EmployeeModel", b =>
                 {
                     b.HasOne("StoreManagement.Domain.Models.User.UserModel", "User")
@@ -347,12 +336,6 @@ namespace StoreManagement.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StoreManagement.Domain.Models.User.UserModel", "LastModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("LastModifiedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("StoreManagement.Domain.Models.Product.ProductModel", "Product")
                         .WithMany("Inventories")
                         .HasForeignKey("ProductId")
@@ -360,8 +343,6 @@ namespace StoreManagement.Repository.Migrations
                         .IsRequired();
 
                     b.Navigation("BusinessEntity");
-
-                    b.Navigation("LastModifiedBy");
 
                     b.Navigation("Product");
                 });
@@ -374,12 +355,6 @@ namespace StoreManagement.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StoreManagement.Domain.Models.User.UserModel", "LastModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("LastModifiedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("StoreManagement.Domain.Models.Permissions.PermissionModel", "Permission")
                         .WithMany()
                         .HasForeignKey("PermissionId")
@@ -387,29 +362,16 @@ namespace StoreManagement.Repository.Migrations
                         .IsRequired();
 
                     b.HasOne("StoreManagement.Domain.Models.User.UserModel", "User")
-                        .WithMany()
+                        .WithMany("SecurityRoleAssociations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("BusinessEntity");
 
-                    b.Navigation("LastModifiedBy");
-
                     b.Navigation("Permission");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("StoreManagement.Domain.Models.Product.ProductModel", b =>
-                {
-                    b.HasOne("StoreManagement.Domain.Models.User.UserModel", "LastModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("LastModifiedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LastModifiedBy");
                 });
 
             modelBuilder.Entity("StoreManagement.Domain.Models.Purchase.PurchaseModel", b =>
@@ -421,7 +383,7 @@ namespace StoreManagement.Repository.Migrations
                         .IsRequired();
 
                     b.HasOne("StoreManagement.Domain.Models.User.UserModel", "User")
-                        .WithMany()
+                        .WithMany("Purchases")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -458,6 +420,10 @@ namespace StoreManagement.Repository.Migrations
             modelBuilder.Entity("StoreManagement.Domain.Models.User.UserModel", b =>
                 {
                     b.Navigation("Employees");
+
+                    b.Navigation("Purchases");
+
+                    b.Navigation("SecurityRoleAssociations");
                 });
 #pragma warning restore 612, 618
         }

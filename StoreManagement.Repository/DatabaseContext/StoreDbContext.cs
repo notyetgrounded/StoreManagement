@@ -32,6 +32,7 @@ namespace StoreManagement.Repository.DatabaseContext
             modelBuilder.ApplyConfiguration(new PurchaseProductConfiguration());
             modelBuilder.ApplyConfiguration(new SecurityRoleAssociationConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new PurchaseConfiguration());
         }
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options): base(options)

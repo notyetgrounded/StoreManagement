@@ -380,7 +380,7 @@ namespace StoreManagement.Repository.Migrations
                         .IsRequired();
 
                     b.HasOne("StoreManagement.Domain.Models.User.UserModel", "User")
-                        .WithMany("purchases")
+                        .WithMany("Purchases")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -418,9 +418,9 @@ namespace StoreManagement.Repository.Migrations
                 {
                     b.Navigation("Employees");
 
-                    b.Navigation("SecurityRoleAssociations");
+                    b.Navigation("Purchases");
 
-                    b.Navigation("purchases");
+                    b.Navigation("SecurityRoleAssociations");
                 });
 #pragma warning restore 612, 618
         }

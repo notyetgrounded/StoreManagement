@@ -9,6 +9,7 @@ namespace StoreManagement.Repository.Configurations
         public void Configure(EntityTypeBuilder<BusinessEntityModel> builder)
         {
             builder.HasIndex(b => b.Name).IsUnique();
+
         }
     }
 }

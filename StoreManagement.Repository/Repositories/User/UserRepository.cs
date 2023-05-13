@@ -1,4 +1,5 @@
-﻿using StoreManagement.Domain.Models.User;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreManagement.Domain.Models.User;
 using StoreManagement.Repository.DatabaseContext;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,18 @@ namespace StoreManagement.Repository.Repositories.User
         public void CreateUser(UserModel userModel)
         {
             _storeDbContext.Users.Add(userModel);
+        }
+
+        private string UserCodeGeneterator()
+        {
+            var count = 0;
+            var maxCode= _storeDbContext.Users.MaxAsync(u => u.Code);
+            maxcount
+        }
+
+        public Task<IList<UserModel>> GetAllUsersAsync()
+        {
+            return _storeDbContext.Users.ToListAsync();
         }
     }
 }

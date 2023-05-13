@@ -3,6 +3,7 @@ using StoreManagement.Domain.Constants;
 using StoreManagement.Domain.Models.BusinessEntity;
 using StoreManagement.Domain.Models.Product;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StoreManagement.Domain.Models.Inventory
 {

@@ -25,5 +25,10 @@ namespace StoreManagement.Service.Services.UserService
             await _repositoryManager.UnitOfWorkRepository.SaveChangesAsync();
             return userModel.Adapt<UserDto>();
         }
+
+        public async Task<IList<UserDto>> GetAllUsers()
+        {
+            return (await _repositoryManager.UsersRepository.GetAllUsers()).Adapt<IList<UserDto>>();
+        }
     }
 }

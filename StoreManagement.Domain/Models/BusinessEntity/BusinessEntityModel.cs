@@ -15,5 +15,7 @@ namespace StoreManagement.Domain.Models.BusinessEntity
         [MaxLength(ApplicationConstants.DescriptionLength)]
         public string Description { get; set;}
         public int Type { get; set;}
+        public IList<LinkedBusinessEntitesModel> LinkedParentBuisnessEntities { get; set; }
+        public IList<LinkedBusinessEntitesModel> LinkedChildBuisnessEntities { get; set; }
     }
 }

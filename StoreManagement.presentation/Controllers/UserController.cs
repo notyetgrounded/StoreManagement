@@ -26,5 +26,12 @@ namespace StoreManagement.Presentation.WebApi.Controllers
         {
             return await _serviceManager.UserService.GetAllUsersAsync();
         }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteUser(string code)
+        {
+            await _serviceManager.UserService.DeleteUserAsync(code);
+            return Ok();
+        }
     }
 }

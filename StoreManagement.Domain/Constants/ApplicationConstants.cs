@@ -11,5 +11,6 @@ namespace StoreManagement.Domain.Constants
         public const int DescriptionLength = 50;
         public const int CodeLength = 10;
         public const int NameLength = 30;
+        public const string UserCodePrefix = "USR";
     }
 }

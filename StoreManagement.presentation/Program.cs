@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using StoreManagement.Presentation.WebApi.Middleware;
 using StoreManagement.Repository.DatabaseContext;
 using StoreManagement.Repository.Repositories.RepositoryManager;
 using StoreManagement.Service.Services.ServiceManager;
@@ -10,7 +12,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddScoped<ExceptionHanlingMiddleware, ExceptionHanlingMiddleware>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddDbContext<StoreDbContext>(options =>
@@ -30,8 +32,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware< ExceptionHanlingMiddleware>();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

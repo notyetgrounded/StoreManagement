@@ -5,6 +5,7 @@ namespace StoreManagement.Service.Services.UserService
     public interface IUserService
     {
         Task<UserDto> CreateUser(UserCreateDto userDto);
-        Task<IList<UserDto>> GetAllUsers();
+        Task DeleteUserAsync(string code);
+        Task<IList<UserDto>> GetAllUsersAsync();
     }
 }
